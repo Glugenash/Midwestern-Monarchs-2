@@ -1,0 +1,30 @@
+﻿l_english:
+ free_city_status:0 "Free City"
+ margrave_status:0 "Margrave"
+ duchy_status:0 "Duchy"
+ kingdom_status:0 "Kingdom"
+ empire_status:0 "Empire"
+ #national spirits
+ anti_resistance_efforts:0 "Anti-Resistance Efforts"
+ zzz_paying_dues:0 "Debts Owed"
+ zzz_paying_dues:0 "Whether being paid to foreign overlords, or in exchange for something, this nation owes a portion of its economy to another, and is currently paying it off."
+ payment_received:0 "Financial Growth"
+ payment_received_desc:0 "Whether by foreign investment, large economic growth, or a bountiful harvest, this nation is gifted with great benefits in its finances."
+ ULM_CAR_economic_pact:0 "[ULM.GetAdjective]-[CAR.GetAdjective] Economic Pact"
+ MIS_recent_raiding_1:0 "Recent Successful Raid"
+ AHO_officer_inexperience:0 "Officer Inexperience"
+ #tooltips
+ owns_more_than_12_states:0 "Owns more than 12 States"
+ owns_more_than_10_states:0 "Owns more than 10 States"
+ owns_more_than_6_states:0 "Owns more than 6 States"
+ owns_more_than_4_states:0 "Owns more than 4 States"
+ owns_more_than_5_states:0 "Owns more than 5 States"
+ #categories
+ power_status:0 "Prestige"
+ #traits
+ breadbasket_of_region:0 "Region's Breadbasket"
+ dragon_of_borea:0 "Dragon of Borea"
+ tested_with_fire:0 "Tested With Fire"
+ very_inexperienced_politician:0 "Very Inexperienced Politician"
+ inexperienced_politician:0 "Inexperienced Politician"
+ second_coalition_war_hero:0 "Hero of the Second Coalition War"

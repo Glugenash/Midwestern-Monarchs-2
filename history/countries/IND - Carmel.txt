@@ -1,0 +1,22 @@
+capital = 80
+
+oob = "ANG_1936"
+
+AHO = {
+	set_autonomy = {
+		target = IND
+		autonomous_state = autonomy_puppet
+	}
+}
+
+set_politics = {
+	ruling_party = neutrality
+	last_election = "1933.3.5"
+	election_frequency = 48
+	elections_allowed = no
+}
+
+set_popularities = {
+	neutrality = 90
+	fascism = 10
+}

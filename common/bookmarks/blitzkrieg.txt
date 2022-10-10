@@ -1,0 +1,28 @@
+bookmarks = {
+	bookmark = {
+		name = "BLITZKRIEG_NAME"
+		desc = "BLITZKRIEG_DESC"
+		date = 1972.4.28.12
+		picture = "GFX_select_date_1939"
+		default_country = "BOR"
+		default = yes
+	
+		BOR = {
+			history = MDW_blitzkrieg_history
+			ideology = democratic
+			ideas={
+				
+			}
+			focuses = {
+				
+			}
+		}
+		"---"={
+			history = "OTHER_BLITZKRIEG_DESC"
+		}
+		effect = {
+			randomize_weather = 12345 # <- Obligatory in every bookmark !
+			#123 = { rain_light = yes }
+		}
+	}
+}

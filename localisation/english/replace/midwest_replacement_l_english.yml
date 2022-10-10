@@ -1,0 +1,8 @@
+﻿l_english:
+ fascism_drift:0 "Absolutist Support Daily"
+ communism_drift:0 "Republican Support Daily"
+ democratic_drift:0 "Aristocratic Support Daily"
+ neutrality_drift:0 "Constitutional Support Daily"
+ fascist_demagogue:0 "Absolutist Enforcer"
+ democratic_reformer:0 "Aristocratic Reformer"
+ communist_revolutionary:0 "Republican Revolutionary"

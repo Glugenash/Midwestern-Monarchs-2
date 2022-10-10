@@ -1,0 +1,23 @@
+capital = 89
+
+oob = "ANG_1936"
+
+set_stability = 0.4
+
+add_ideas = {
+	limited_conscription
+}
+
+set_politics = {
+	ruling_party = democratic
+	last_election = "1933.3.5"
+	election_frequency = 48
+	elections_allowed = no
+}
+
+set_popularities = {
+	democratic = 70
+	fascism = 10
+	neutrality = 10
+	communism = 10
+}

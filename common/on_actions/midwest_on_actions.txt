@@ -1,0 +1,181 @@
+on_actions = { 
+	on_startup = {
+		effect = {
+			every_country = {
+				add_ai_strategy = {
+					type = force_build_armies
+					value = 150
+				}
+			}
+			every_country = {
+				random_list = {
+					50 = { set_country_flag = disloyal_subject }
+					50 = { }
+				}
+			}
+			every_country = {
+				d_create_army = yes
+				set_technology = {
+					gw_artillery = 1
+					interwar_artillery = 1
+					gwtank = 1
+					early_fighter = 1
+					infantry_weapons = 1
+					infantry_weapons1 = 1
+					popup = no
+				}
+				if = {
+					limit = { has_dlc = "No Step Back" }
+					set_technology = {
+						gwtank_chassis = 1
+						basic_light_tank_chassis = 1
+						popup = no
+					}
+					else = {
+						set_technology = {
+							gwtank = 1
+							basic_light_tank = 1
+							popup = no
+						}
+					}
+				}
+				if = {
+					limit = { has_dlc = "Man the Guns" }
+					set_technology = {
+						early_ship_hull_light = 1
+						basic_ship_hull_light = 1
+						basic_torpedo = 1
+						basic_battery = 1
+						early_ship_hull_submarine = 1
+						popup = no
+					}
+					else = {
+						set_technology = {
+							early_destroyer = 1
+							basic_destroyer = 1
+							early_submarine = 1
+							popup = no
+						}
+					}
+				}
+			}
+			every_state = {
+				limit = { naval_base > 0 }
+				set_state_flag = port_city_flag
+			}
+		}
+	}
+	on_declare_war = {
+		effect = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = battle_royale_status
+						option = DEFAULT
+					}
+				}
+				ROOT = { country_event = { id = generic.26 days = 1000 random = 1000 } }
+				FROM = { country_event = { id = generic.26 days = 1000 random = 1000 } }
+			}
+		}
+	}
+	on_war = {
+		effect = {
+			if = {
+				limit = {
+					has_game_rule = {
+						rule = battle_royale_status
+						option = DEFAULT
+					}
+				}
+				ROOT = { country_event = { id = generic.26 days = 1000 random = 1000 } }
+			}
+		}
+	}
+	on_monthly = {
+		effect = {
+			if = {
+				limit = { 
+					has_war = yes 
+					has_game_rule = {
+						rule = battle_royale_status
+						option = DEFAULT
+					}
+				}
+				random_list = {
+					50 = {
+						random_list = {
+							40 = { }
+							20 = {
+								country_event = { id = war_events.1 days = 2 random = 288 }
+							}
+							20 = {
+								country_event = { id = war_events.3 days = 2 random = 288 }
+							}
+							20 = {
+								country_event = { id = war_events.4 days = 2 random = 288 }
+							}
+						}
+					}
+					50 = {}
+				}
+			}
+			if = {
+				limit = {
+					any_country = {
+						is_in_faction_with = ROOT
+						has_government = communism
+					}
+					NOT = {
+						has_government = communism
+					}
+					has_war = no
+				}
+				every_country = {
+					limit = { is_in_faction_with = ROOT has_government = communism }
+					ROOT = {
+						add_ai_strategy = {
+							type = alliance
+							id = PREV
+							value = -100
+						}
+					}
+					add_ai_strategy = {
+						type = alliance
+						id = ROOT
+						value = -100
+					}
+				}
+			}
+			if = {
+				limit = {
+					is_in_faction = yes
+					is_faction_leader = no
+					is_subject = no
+					has_war = no
+					OR = {
+						num_subjects > 1
+						num_of_factories > 30
+					}
+				}
+				FACTION_LEADER = {
+					ROOT = {
+						add_ai_strategy = {
+						type = alliance
+						id = PREV
+						value = -100
+						}
+					}
+				}
+			}
+		}
+	}
+	on_weekly = {
+		effect = {
+			if = {
+				limit = { is_subject = yes OVERLORD = { has_war = yes } has_country_flag = subject_prepare_revolt }
+				country_event = { id = medwole.16 random = 24 }
+			}
+		}
+	}
+}

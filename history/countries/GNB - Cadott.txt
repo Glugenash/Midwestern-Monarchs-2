@@ -1,0 +1,23 @@
+capital = 27
+
+oob = "ANG_1936"
+
+MDW = {
+	set_autonomy = {
+		target = GNB
+		autonomous_state = autonomy_puppet
+	}
+}
+
+set_politics = {
+	ruling_party = democratic
+	last_election = "1933.3.5"
+	election_frequency = 48
+	elections_allowed = no
+}
+
+set_popularities = {
+	democratic = 70
+	neutrality = 15
+	fascism = 15
+}

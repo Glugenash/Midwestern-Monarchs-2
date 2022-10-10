@@ -1,0 +1,19 @@
+state={
+	id=79
+	name="STATE_79"
+	provinces={
+		485 706 1222 1854 2044 2280 2426 3318 3319 3326 3341 
+	}
+	manpower=100000
+	state_category=town
+	history = {
+		owner = BOR
+		add_core_of = BOR
+		buildings = {
+			infrastructure = 2
+			industrial_complex = 1
+			arms_factory = 1
+		}
+	}
+	buildings_max_level_factor=1.000
+}

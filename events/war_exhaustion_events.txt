@@ -1,0 +1,360 @@
+add_namespace = war_events
+
+country_event = { #commune revolt
+	id = war_events.1
+	is_triggered_only = yes
+
+	trigger = {
+		num_of_controlled_states > 3
+		check_variable = { num_owned_states > 3 }
+		communism > 0.2
+		NOT = { OR = { has_government = communism has_country_flag = has_commune_revolt_already has_idea_with_trait = communist_revolutionary } }
+	}
+
+	hidden = yes
+
+	immediate = {
+		create_dynamic_country = {
+			original_tag = ROOT
+			save_event_target_as = commune_revolt
+			random_state = {
+				limit = { is_owned_by = ROOT is_fully_controlled_by = ROOT is_core_of = ROOT }
+				event_target:commune_revolt = {
+					transfer_state = PREV
+				}
+			}
+			add_ideas = extensive_conscription
+			set_popularities = {
+				communism = 100
+			}
+			set_politics = {
+				ruling_party = communism
+			}
+			ROOT = {
+				country_event = { id = war_events.2 hours = 1 random = 1 }
+				set_country_flag = has_commune_revolt_already
+			}
+		}
+	}
+
+	option = {
+		name = war_events.1.a
+	}
+}
+
+country_event = { #commune revolt
+	id = war_events.2
+	title = war_events.2.t
+	desc = war_events.2.d
+	is_triggered_only = yes
+
+	immediate = {
+		hidden_effect = {
+			add_popularity = { ideology = communism popularity = -0.15 }
+			random_country_with_original_tag = {
+				original_tag_to_check = ROOT
+				limit = { has_government = communism }
+				load_oob = "republican_revolt"
+				capital_scope = {
+					create_unit = {
+						division = "name = \"Revolutionary Division\" division_template = \"Revolutionary Division\" start_experience_factor = 0.2"
+						owner = PREV
+						count = 3
+					}
+				}
+				ROOT = {
+					add_popularity = {
+						ideology = communism
+						popularity = -0.15
+					}
+					if = {
+						limit = {
+							num_divisions > 13
+						}
+						transfer_units_fraction = {
+							target = PREV
+							size = 0.2
+							army_ratio = 0.2
+						}
+					}
+				}
+			}
+		}
+	}
+
+	option = { #crush the commies
+		name = war_events.2.a
+		random_country_with_original_tag = {
+			original_tag_to_check = ROOT
+			limit = { has_government = communism }
+			ROOT = {
+				declare_war_on = {
+					target = PREV
+					type = civil_war
+				}
+			}
+		}
+	}
+}
+
+country_event = { #draft dodging
+	id = war_events.3
+	title = war_events.3.t
+	desc = war_events.3.d
+	is_triggered_only = yes
+
+	trigger = {
+		has_war_support < 0.5
+		NOT = {
+			has_idea = draft_dodging
+			OR = {
+				has_idea = limited_conscription
+				has_idea = volunteer_only
+			}
+		}
+	}
+
+	option = { #this will blow over soon
+		name = war_events.3.a
+		add_timed_idea = {
+			idea = draft_dodging
+			days = 75
+		}
+	}
+	option = { #spend pp to reduce time
+		name = war_events.3.b
+		add_political_power = -25
+		add_timed_idea = {
+			idea = draft_dodging
+			days = 30
+		}
+	}
+	option = { #be 1984
+		name = war_events.3.b
+		add_popularity = {
+			ideology = fascism
+			popularity = 0.03
+		}
+		add_timed_idea = {
+			idea = draft_dodging
+			days = 30
+		}
+	}
+}
+
+country_event = { #strikes
+	id = war_events.4
+	title = war_events.4.t
+	desc = war_events.4.d
+	is_triggered_only = yes
+
+	trigger = {
+		has_war_support < 0.5
+		num_of_available_civilian_factories > 3
+		NOT = {
+			has_idea = strikes_1 
+		}
+	}
+
+	option = { #this will blow over soon
+		name = war_events.3.a
+		add_timed_idea = {
+			idea = strikes_1
+			days = 75
+		}
+	}
+	option = { #spend pp to reduce time
+		name = war_events.4.b
+		add_political_power = -25
+		add_timed_idea = {
+			idea = strikes_1
+			days = 30
+		}
+	}
+	option = { #accept demands
+		name = war_events.4.c
+		trigger = {
+			NOT = {
+				has_government = communism
+			}
+		}
+		add_stability = -0.02
+		add_popularity = {
+			ideology = communism
+			popularity = 0.03
+		}
+		add_timed_idea = {
+			idea = strikes_1
+			days = 30
+		}
+	}
+}
+
+country_event = { #FROM offers peace treaty - status quo
+	id = war_events.5
+	title = war_events.5.t
+	desc = war_events.5.d
+	is_triggered_only = yes
+
+	option = { #alright
+		name = war_events.5.a
+		every_owned_state = {
+			limit = { NOT = { is_controlled_by = ROOT } }
+			CONTROLLER = {
+				transfer_state = PREV
+			}
+		}
+		every_state = {
+			limit = { NOT = { is_owned_by = ROOT } is_controlled_by = ROOT }
+			ROOT = {
+				transfer_state = PREV
+			}
+		}
+		white_peace = FROM
+		hidden_effect = {
+			every_country = {
+				limit = { OR = { has_war_with = ROOT has_war_with = FROM } }
+				country_event = { id = war_events.6 }
+			}
+		}
+	}
+	option = { #Nah
+		name = war_events.5.b
+		add_war_support = -0.05
+		add_popularity = {
+			ideology = ROOT
+			popularity = -0.05
+		}
+		add_to_variable = { war_exhaustion_mobilization = -0.03 }
+		add_to_variable = { war_exhaustion_mobilization_display = -3 }
+		add_to_variable = { war_exhaustion_morale_factor = -0.03 }
+		add_to_variable = { war_exhaustion_morale_factor_display = -3 }
+		add_to_variable = { war_exhaustion_surrender_limit = -0.03 }
+		add_to_variable = { war_exhaustion_surrender_limit_display = -3 }
+		FROM = {
+			country_event = { id = ulm.5 hours = 3 random = 3 }
+		}
+	}
+}
+
+country_event = { #peace deal signed - honor it?
+	id = war_events.6
+	title = war_events.6.t
+	desc = war_events.6.d
+	is_triggered_only = yes
+
+	option = { #alright
+		name = war_events.5.a
+		every_country = {
+			limit = { has_war_with = ROOT }
+			ROOT = {
+				white_peace = PREV
+			}
+		}
+	}
+	option = { #Nah
+		name = war_events.5.b
+		ai_chance = {
+			factor = 0
+		}
+		add_war_support = -0.05
+		add_popularity = {
+			ideology = ROOT
+			popularity = -0.05
+		}
+		add_to_variable = { war_exhaustion_mobilization = -0.03 }
+		add_to_variable = { war_exhaustion_mobilization_display = -3 }
+		add_to_variable = { war_exhaustion_morale_factor = -0.03 }
+		add_to_variable = { war_exhaustion_morale_factor_display = -3 }
+		add_to_variable = { war_exhaustion_surrender_limit = -0.03 }
+		add_to_variable = { war_exhaustion_surrender_limit_display = -3 }
+		FROM = {
+			country_event = { id = ulm.5 hours = 3 random = 3 }
+		}
+	}
+}
+
+country_event = { #how long until battle royale?
+	id = war_events.7
+	title = war_events.7.t
+	desc = war_events.7.d
+	is_triggered_only = yes
+
+	option = { #2 months
+		name = war_events.7.a
+		every_country = {
+			country_event = { id = war_events.8 days = 60 }
+			set_country_flag = {
+				flag = battle_royale_timer
+				days = 60
+				value = 1
+			}
+		}
+	}
+	option = { #6 months
+		name = war_events.7.b
+		every_country = {
+			country_event = { id = war_events.8 days = 180 }
+			set_country_flag = {
+				flag = battle_royale_timer
+				days = 180
+				value = 1
+			}
+		}
+	}
+	option = { #12 months
+		name = war_events.7.c
+		every_country = {
+			country_event = { id = war_events.8 days = 365 }
+			set_country_flag = {
+				flag = battle_royale_timer
+				days = 365
+				value = 1
+			}
+		}
+	}
+}
+
+country_event = { #battle royale begins
+	id = war_events.8
+	title = war_events.8.t
+	desc = war_events.8.d
+	is_triggered_only = yes
+
+	option = { #
+		name = war_events.8.a
+		random_country = {
+			limit = { NOT = { tag = ROOT } is_neighbor_of = ROOT }
+			ROOT = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+	}
+}
+
+country_event = { #battle royale continues
+	id = war_events.9
+	title = war_events.9.t
+	desc = war_events.9.d
+	is_triggered_only = yes
+
+	option = { #
+		name = war_events.9.a
+		every_state = {
+			limit = { is_owned_by = ROOT NOT = { is_core_of = ROOT } }
+			add_core_of = ROOT
+		}
+		random_country = {
+			limit = { NOT = { OR = { tag = ROOT has_war_with = ROOT } } is_neighbor_of = ROOT }
+			ROOT = {
+				declare_war_on = {
+					target = PREV
+					type = annex_everything
+				}
+			}
+		}
+	}
+}

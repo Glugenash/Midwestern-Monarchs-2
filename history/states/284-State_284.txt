@@ -1,0 +1,19 @@
+state={
+	id=284
+	name="STATE_284"
+	provinces={
+		140 233 1837 2216 3637 3673 
+	}
+	manpower=100000
+	state_category=town
+	history = {
+		owner = BOR
+		add_core_of = BOR
+		buildings = {
+			infrastructure = 2
+			industrial_complex = 1
+			arms_factory = 1
+		}
+	}
+	buildings_max_level_factor=1.000
+}

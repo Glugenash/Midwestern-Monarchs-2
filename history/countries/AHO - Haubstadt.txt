@@ -1,0 +1,18 @@
+capital = 100
+
+set_cosmetic_tag = AHO_kingdom
+add_ideas = AHO_officer_inexperience
+add_ideas = kingdom_status
+
+oob = "ANG_1936"
+
+set_politics = {
+	ruling_party = neutrality
+	last_election = "1933.3.5"
+	election_frequency = 48
+	elections_allowed = no
+}
+
+set_popularities = {
+	neutrality = 100
+}

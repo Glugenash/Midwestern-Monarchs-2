@@ -1,0 +1,185 @@
+# this one is called for nightly tests
+ai_test_startup_effect = {
+	# if = {
+	# 	limit = { is_major = yes } 
+	# 	#enable crypto agency in ~2.5 years
+	# 	country_event = { id = generic_debug.42 days = 900 }
+	# }
+	# if = {
+	# 	limit = { 
+	# 		OR = {
+	# 			tag = ENG
+	# 		}
+	# 	} 
+	# 	#give usa access to france & england in ~4 year
+	# 	country_event = { id = generic_debug.43 days = 1500 }
+	# }
+}
+
+# effects that starts with name d_ will be available as console command
+# use "effect_name_DESC" to define a description
+
+d_collaboration = {
+	if = {
+		limit = { tag = FROM }
+		log = "Error:"
+		log = "  right click a country to select it for adding collaboration"
+		log = "  you can specify collaboration amount to add or just use 'collaboration' to add 10%"
+		log = " "
+	}
+	else = {
+		FROM = {
+			add_collaboration = { 
+				target = PREV 
+				value = args^0?0.1				
+			}
+			
+			log = "Added [?args^0?0.1|H%] collaboration for [PREV.GetName]"
+		}
+	}
+}
+
+d_add_fake_armies = {
+	if = {
+		# create template if not exist
+		limit = {
+			not = {
+				has_country_flag = fake_intel_template_created
+			}
+		}
+		division_template = {
+			name = "Fake Intel Division"
+			
+			is_fake_intel_division = yes
+			is_locked = yes
+			regiments = {
+				fake_intel_unit = { x = 0 y = 0 }
+			}
+		}
+		set_country_flag = fake_intel_template_created
+	}
+	
+	# give it an id and store id & current date so it can be deleted later
+	if = {
+		limit = { NOT = { has_variable = fake_intel_id } }
+		set_variable = { fake_intel_id = 1000 }
+	}
+	set_temp_variable = { id_to_set = fake_intel_id }
+	add_to_variable = { fake_intel_id = 1 }
+	add_to_array = {
+		fake_intel_ids_to_delete = id_to_set
+	}
+	set_variable = { num_days_for_fake_intel_id@var:id_to_set = global.num_days }
+	
+	# minimum of 0.25 of current armies or 24
+	set_temp_variable = { num_to_create = num_armies }
+	multiply_temp_variable = { num_to_create = 0.25 }
+	round_temp_variable = num_to_create
+	add_to_temp_variable = { num_to_create = 1 }
+	clamp_temp_variable = {
+		var = num_to_create
+		min = 24
+	}
+	
+	# create actual units
+	capital_scope = {
+		create_unit = {
+			division = "division_template = \"Fake Intel Division\" start_experience_factor = 0.5" 
+			owner = PREV
+			count = num_to_create
+			id = id_to_set
+		}
+	}
+	
+	# will delete them after 90 days
+	country_event = { id = lar_fake_intel_units.1 days = 90 }
+	
+	log = "Done"
+}
+
+keep_current_politics = {
+	set_variable = { save_democratic = party_popularity@democratic }
+	set_variable = { save_fascism = party_popularity@fascism }
+	set_variable = { save_neutrality = party_popularity@neutrality }
+	set_variable = { save_communism = party_popularity@communism }
+
+	multiply_variable = { save_democratic = 100 }
+	multiply_variable = { save_fascism = 100 }
+	multiply_variable = { save_neutrality = 100 }
+	multiply_variable = { save_communism = 100 }
+
+	if = {
+		limit = { has_government = democratic }
+		set_country_flag = { flag = was_democratic value = 1 days = 1 }
+	}
+	if = {
+		limit = { has_government = fascism }
+		set_country_flag = { flag = was_fascism value = 1 days = 1 }
+	}
+	if = {
+		limit = { has_government = communism }
+		set_country_flag = { flag = was_communism value = 1 days = 1 }
+	}
+	if = {
+		limit = { has_government = neutrality }
+		set_country_flag = { flag = was_neutrality value = 1 days = 1 }
+	}
+
+	set_temp_variable = { total_ideology_score = 100 }
+	subtract_from_temp_variable = { total_ideology_score = save_democratic }
+	subtract_from_temp_variable = { total_ideology_score = save_fascism }
+	subtract_from_temp_variable = { total_ideology_score = save_neutrality }
+	subtract_from_temp_variable = { total_ideology_score = save_communism }
+
+	if = {
+		limit = { NOT = { check_variable = { total_ideology_score = 0 } } }
+		if = {
+			limit = { has_government = democratic }
+			add_to_variable = { save_democratic = total_ideology_score }
+		}
+		else_if = {
+			limit = { has_government = fascism }
+			add_to_variable = { save_fascism = total_ideology_score }
+		}
+		else_if = {
+			limit = { has_government = communism }
+			add_to_variable = { save_communism = total_ideology_score }
+		}
+		else = {
+			limit = { has_government = neutrality }
+			add_to_variable = { save_neutrality = total_ideology_score }
+		}
+	}
+
+	hidden_effect = { country_event = { id = dday_base.5 hours = 1 } }
+}
+
+reset_government = {
+	set_popularities = {
+		fascism = save_fascism
+		communism = save_communism
+		neutrality = save_neutrality
+		democratic = save_democratic
+	}
+	if = {
+		limit = { has_country_flag = was_democratic }
+		set_politics = { ruling_party = democratic }
+	}
+	if = {
+		limit = { has_country_flag = was_fascism }
+		set_politics = { ruling_party = fascism }
+	}
+	if = {
+		limit = { has_country_flag = was_communism }
+		set_politics = { ruling_party = communism }
+	}
+	if = {
+		limit = { has_country_flag = was_neutrality }
+		set_politics = { ruling_party = neutrality }
+	}
+
+	clear_variable = save_fascism
+	clear_variable = save_democratic
+	clear_variable = save_neutrality
+	clear_variable = save_communism
+}

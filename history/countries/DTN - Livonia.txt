@@ -1,0 +1,17 @@
+capital = 39
+
+set_cosmetic_tag = DTN_grand_duchy
+
+add_ideas = duchy_status
+
+oob = "ANG_1936"
+set_politics = {
+	ruling_party = neutrality
+	last_election = "1933.3.5"
+	election_frequency = 48
+	elections_allowed = no
+}
+
+set_popularities = {
+	neutrality = 100
+}

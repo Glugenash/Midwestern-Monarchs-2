@@ -1,0 +1,20 @@
+capital = 11
+
+MDW = {
+	set_autonomy = {
+		target = MIC
+		autonomous_state = autonomy_integrated_puppet
+	}
+}
+
+oob = "ANG_1936"
+set_politics = {
+	ruling_party = democratic
+	last_election = "1933.3.5"
+	election_frequency = 48
+	elections_allowed = no
+}
+
+set_popularities = {
+	democratic = 100
+}

@@ -1,0 +1,113 @@
+ideas = {
+
+	political_advisor = {
+		
+		CSA_huey_long = {
+
+			picture = generic_political_advisor_europe_3
+			
+			allowed = {
+				always = no
+			}
+			
+			traits = { silent_workhorse }
+		}
+
+	}
+
+	theorist = {
+
+		BRZ_newton_cavalcanti = {
+			ledger = army
+					
+			picture = generic_army_south_america_1
+
+			allowed = {
+				always = no
+			}
+			
+			traits = { military_theorist }
+		}
+	}
+
+	army_chief = {
+
+		CSA_victor_strydonck_burkel = {
+			picture = generic_army_europe_3
+			
+			allowed = {
+				always = no
+			}
+			
+
+			
+			traits = { army_chief_offensive_2 }
+			
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+	}
+
+	air_chief = {
+
+		CSA_jules_iserentant = {
+			picture = generic_air_europe_3
+			
+			allowed = {
+				always = no
+			}
+			
+
+			
+			traits = { air_chief_ground_support_2 }
+			
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+	}
+
+	navy_chief = {
+
+		CSA_fritz_conrad = {
+			picture = generic_navy_europe_2
+			
+			allowed = {
+				always = no
+			}
+			
+
+			
+			traits = { navy_chief_naval_aviation_2 }
+			
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+	}
+
+	high_command = {
+
+		CSA_victor_van_strydonck_de_burkel = {
+			ledger = army
+			
+			picture = generic_army_europe_1
+			
+			allowed = {
+				always = no
+			}
+			
+			traits = { army_infantry_2 }
+			
+			ai_will_do = {
+				factor = 1
+			}
+		}
+
+	}
+
+}
