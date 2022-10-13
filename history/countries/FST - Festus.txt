@@ -1,6 +1,5 @@
 capital = 87
 
-add_ideas = duchy_status
 
 oob = "ANG_1936"
 

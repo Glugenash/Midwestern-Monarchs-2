@@ -1,8 +1,5 @@
 capital = 39
 
-set_cosmetic_tag = DTN_grand_duchy
-
-add_ideas = duchy_status
 
 oob = "ANG_1936"
 set_politics = {

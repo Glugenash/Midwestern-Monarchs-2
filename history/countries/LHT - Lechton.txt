@@ -1,11 +1,5 @@
 capital = 48
 
-MDW = {
-	set_autonomy = {
-		target = LHT
-		autonomous_state = autonomy_puppet
-	}
-}
 
 oob = "ANG_1936"
 set_politics = {

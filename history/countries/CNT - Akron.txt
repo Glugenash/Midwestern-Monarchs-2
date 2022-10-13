@@ -1,8 +1,5 @@
 capital = 58
 
-set_cosmetic_tag = CNT_principality
-
-add_ideas = duchy_status
 
 oob = "ANG_1936"
 

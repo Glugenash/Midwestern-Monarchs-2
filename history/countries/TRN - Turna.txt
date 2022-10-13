@@ -1,6 +1,5 @@
 capital = 16
 
-set_cosmetic_tag = TRN_free_city
 
 oob = "ANG_1936"
 

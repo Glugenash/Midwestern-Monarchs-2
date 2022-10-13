@@ -1,8 +1,5 @@
 capital = 68
 
-set_cosmetic_tag = DAV_kingdom
-
-add_ideas = kingdom_status
 
 oob = "ANG_1936"
 

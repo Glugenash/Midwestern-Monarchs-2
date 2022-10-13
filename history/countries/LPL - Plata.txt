@@ -2,13 +2,6 @@ capital = 76
 
 oob = "ANG_1936"
 
-FST = {
-	set_autonomy = {
-		target = LPL
-		autonomous_state = autonomy_integrated_puppet
-	}
-}
-
 set_politics = {
 	ruling_party = neutrality
 	last_election = "1933.3.5"

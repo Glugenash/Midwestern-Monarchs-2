@@ -180,7 +180,7 @@
 179;177;212;247;land;false;plains;1
 180;201;170;133;land;false;plains;1
 181;235;174;157;land;false;plains;1
-182;228;203;242;land;false;plains;1
+182;228;203;242;land;true;plains;1
 183;225;242;102;land;false;plains;1
 184;215;239;92;land;true;plains;1
 185;193;246;214;land;false;plains;1
@@ -1383,7 +1383,7 @@
 1382;245;186;246;land;true;plains;1
 1383;234;217;198;land;false;plains;1
 1384;228;89;234;land;true;plains;1
-1385;238;149;225;land;false;plains;1
+1385;238;149;225;land;true;plains;1
 1386;221;250;125;land;false;plains;1
 1387;186;228;229;land;false;plains;1
 1388;100;240;176;land;false;plains;1

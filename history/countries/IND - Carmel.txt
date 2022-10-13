@@ -2,12 +2,6 @@ capital = 80
 
 oob = "ANG_1936"
 
-AHO = {
-	set_autonomy = {
-		target = IND
-		autonomous_state = autonomy_puppet
-	}
-}
 
 set_politics = {
 	ruling_party = neutrality
