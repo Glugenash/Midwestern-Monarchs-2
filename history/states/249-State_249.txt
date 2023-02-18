@@ -2,19 +2,17 @@ state={
 	id=249
 	name="STATE_249"
 	provinces={
-		116 253 1128 1549 2366 2642 2876 3581 3598 
+		638 1136 1220 1503 1687 
 	}
-	manpower=100000
-	state_category=town
+	manpower=10000
 	history = {
-		owner = BOR
-		add_core_of = BOR
+		owner = GER
+		add_core_of = GER
 		buildings = {
-			infrastructure = 2
+			infrastructure = 1
 			industrial_complex = 1
-			arms_factory = 1
 		}
 	}
+	state_category=rural
 	buildings_max_level_factor=1.000
-	local_supplies=0.0
 }

@@ -1,8 +1,0 @@
-war_exhaustion_modifier = {
-	enable = {
-		has_war = yes
-	}
-	mobilization_speed = war_exhaustion_mobilization
-	surrender_limit = war_exhaustion_surrender_limit
-	army_morale_factor = war_exhaustion_morale_factor
-}
